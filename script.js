@@ -2,6 +2,8 @@
 var generateBtn = document.querySelector("#generate");
 var endPass="";
 // Write password to the #password input
+generateBtn.addEventListener("click", generatePassword)
+
 function generatePassword() {
   var passLength = prompt ("How many characters (8-128) do you want in the password?")
   if (passLength <8 || passLength > 128 ) {
@@ -15,6 +17,7 @@ function generatePassword() {
     writePassword();
 
   }
+
   function writePassword() {
     var alphaLower = "abcdefghijgklmnopqrstuvwxyz";
     var alphaUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -25,34 +28,31 @@ function generatePassword() {
 
     if (charUpper) {
       codeSpec = codeSpec + alphaUpper
-    } 
+   } 
     if (charNum) {
       codeSpec = codeSpec + numbs
    } 
-  if (charSpec) {
+    if (charSpec) {
     codeSpec = codeSpec + chars
-  }
+   }
 
 
   console.log("These are your code options " + codeSpec);
   console.log (codeSpec.length);
   console.log (passLength);
-  for (var i = passLength; i > 0; i == 0) {
-    endPass = endPass+ codeSpec[Math.floor(Math.random() * codeSpec.length)]
-  }
+  for (var i = passLength; i > 0; i--) {
+    endPass = endPass + codeSpec[Math.floor(Math.random() * codeSpec.length-1)];
+  
 
   
   
+  }  
   
-  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.value = endPass;
 
   
 
 }
-
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", generatePassword);
+};
